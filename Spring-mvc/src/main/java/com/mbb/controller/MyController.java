@@ -1,0 +1,17 @@
+package com.mbb.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class MyController {
+	@RequestMapping("/mbb")
+	public @ResponseBody String sayHello() {
+		return "Hello Spring MVC";
+	}
+	@RequestMapping("/hi")
+	public String sayHello1() {
+		return "welcome";
+	}
+}
