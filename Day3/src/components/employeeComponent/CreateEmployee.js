@@ -7,9 +7,9 @@ function CreateEmployee() {
   const [employee, setEmployee] = useState({ name: "", email: "", dob: "" });
   const [emps, setEmps] = useState([]);
   const [errMsg, setErrMsg] = useState("");
-  const [name, setName]=useState("");
+  const [name, setName] = useState("");
   useEffect(() => {
-    const getData=setTimeout(()=> {
+    const getData = setTimeout(() => {
       axios
         .get(url + "/name/" + name)
         .then((response) => {
@@ -18,25 +18,25 @@ function CreateEmployee() {
         .catch((error) => {
           setErrMsg("***********Error is API Call");
         });
-      },500)
-      return ()=>clearTimeout(getData)
+    }, 500);
+    return () => clearTimeout(getData);
   }, [name]);
   useEffect(() => {
     axios
-    .get(url)
-    .then((response) => {
-      setEmps(response.data);
-    })
-    .catch((error) => {
-      setErrMsg("=========Error is API Call"+error);
-    });
+      .get(url)
+      .then((response) => {
+        setEmps(response.data);
+      })
+      .catch((error) => {
+        setErrMsg("=========Error is API Call" + error);
+      });
   }, []);
   const changeHandler = (e) => {
     setEmployee({ ...employee, [e.target.name]: e.target.value });
   };
-  const handleName=(name)=>{
-        setName(name);
-  } 
+  const handleName = (name) => {
+    setName(name);
+  };
   const addEmployee = (e) => {
     e.preventDefault();
     axios
@@ -47,6 +47,16 @@ function CreateEmployee() {
       })
       .catch((e) => {
         setErrMsg(e);
+      });
+  };
+  const deleteEmployee = (eid) => {
+    axios
+      .delete(`http://localhost:8080/employees/${eid}`)
+      .then((response) => {
+        setEmps(response.data);
+      })
+      .catch((e) => {
+        setErrMsg("Error in Delete");
       });
   };
   return (
@@ -80,11 +90,13 @@ function CreateEmployee() {
           />
         </div>
         <div className="d-flex">
-          <button className="btn btn-primary" type="submit">AddEmployee</button>
+          <button className="btn btn-primary" type="submit">
+            AddEmployee
+          </button>
         </div>
       </form>
-      <AllEmployee employees={emps} nameHandler={handleName}/>
-      <p style={{color:"red"}}>{errMsg}</p>
+      <AllEmployee employees={emps} nameHandler={handleName}  delEmp={deleteEmployee}/>
+      <p style={{ color: "red" }}>{errMsg}</p>
     </div>
   );
 }

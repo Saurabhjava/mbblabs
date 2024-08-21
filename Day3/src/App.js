@@ -5,11 +5,17 @@ import ProductClass from "./components/ProductClass";
 import StateDemoWithClass from "./components/StateDemoWithClass";
 import StateWithFunctionDemo from "./components/StateWithFunctionDemo";
 import Employee from "./components/Employee";
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import Parent from "./components/Parent";
 import HowerCounter from "./components/HowerCounter";
 import AllEmployee from "./components/employeeComponent/AllEmployee";
 import CreateEmployee from "./components/employeeComponent/CreateEmployee";
+import NavBar from "./NavBar";
+import { Route, Routes } from "react-router-dom";
+import About from "./components/About";
+import Book from "./components/Book";
+import Mobile from "./components/Mobile";
+import UpdateEmployee from "./components/employeeComponent/UpdateEmployee";
 
 function App() {
   const products = [
@@ -19,7 +25,7 @@ function App() {
     { pname: "RedMe 14", price: "20000", seller: "aa infra" },
   ];
   return (
-    <div className="App">
+    <>
       {/* {products.map((p)=>(
         <ProductClass pname={p.pname} price={p.price} seller={p.seller}></ProductClass>
       ))} */}
@@ -29,8 +35,18 @@ function App() {
       {/* <Employee></Employee> */}
       {/* <Parent></Parent> */}
       {/* <HowerCounter></HowerCounter> */}
-      <CreateEmployee></CreateEmployee>
-    </div>
+      {/* <CreateEmployee></CreateEmployee> */}
+      <NavBar></NavBar>
+      <Routes>
+        <Route path="/" element={<About />}></Route>
+        <Route path="employee" element={<CreateEmployee />}></Route>
+        <Route path="product" element={<Product />}>
+          <Route path="book" element={<Book />} />
+          <Route path="mobile" element={<Mobile />} />
+        </Route>
+        <Route path="updateEmp/:empid" element={<UpdateEmployee/>}/>
+      </Routes>
+    </>
   );
 }
 

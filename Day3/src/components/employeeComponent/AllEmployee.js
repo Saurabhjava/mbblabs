@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function AllEmployee(props) {
-  
+  const navigate=useNavigate();
   return (
     <div>   
       <input
@@ -28,7 +29,8 @@ function AllEmployee(props) {
                   <td>{e.name}</td>
                   <td>{e.email}</td>
                   <td>{e.dob}</td>
-                  <td><button className="btn btn-danger">Delete</button></td>
+                  <td><button className="btn btn-danger" onClick={()=>props.delEmp(e.empid)}>Delete</button></td>
+                  <td><button className="btn btn-success" onClick={()=>navigate(`/updateEmp/${e.empid}`)}>UpdateEmployee</button></td>
                 </tr>
               ))
             }
