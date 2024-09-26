@@ -1,0 +1,28 @@
+<div class="container">
+<h3>Click here to Update Employee</h3>
+<div>
+    <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            Employee ID
+            <input type="text" class="form-control" required [(ngModel)]="emp.empid" name="empid">
+        </div>
+
+        <div class="form-group">
+            Name
+            <input type="text" class="form-control" required [(ngModel)]="emp.name" name="name">
+        </div>
+
+        <div class="form-group">
+            Salary
+            <input type="text" class="form-control" required [(ngModel)]="emp.salary" name="salary">
+        </div>
+        <div class="form-group">
+            DOB
+            <input type="text" class="form-control" required [(ngModel)]="emp.dob" name="dob">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</div>
+
